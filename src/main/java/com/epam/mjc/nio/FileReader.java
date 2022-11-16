@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -15,10 +14,10 @@ public class FileReader {
 
     public static String returnValueFromMap(String str, Map<String, String> map) {
 
-        Set<Map.Entry<String, String>> entrySet=map.entrySet();
+        Set<Map.Entry<String, String>> entrySet = map.entrySet();
         String toReturn = null;
 
-        for (Map.Entry<String,String> pair : entrySet) {
+        for (Map.Entry<String, String> pair : entrySet) {
             if (str.equals(pair.getKey())) {
                 toReturn = pair.getValue();
             }
@@ -29,8 +28,8 @@ public class FileReader {
     public Profile getDataFromFile(File file) {
         String str = "";
 //        file = new File("src\\main\\resources\\Profile.txt");
-        try(RandomAccessFile aFile = new RandomAccessFile(file, "r");
-            FileChannel inChannel = aFile.getChannel();) {
+        try (RandomAccessFile aFile = new RandomAccessFile(file, "r");
+             FileChannel inChannel = aFile.getChannel();) {
 
             long fileSize = inChannel.size();
 
@@ -50,7 +49,7 @@ public class FileReader {
 
         for (String line : lines) {
             String[] newL = line.split(": ");
-            map.put(newL[0],  newL[1]);
+            map.put(newL[0], newL[1]);
         }
 
         return new Profile(returnValueFromMap("Name", map),
