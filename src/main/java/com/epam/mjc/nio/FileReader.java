@@ -26,8 +26,7 @@ public class FileReader {
     }
 
     public Profile getDataFromFile(File file) {
-        String str = "";
-//        file = new File("src\\main\\resources\\Profile.txt");
+        StringBuilder stringBuilder = new StringBuilder();
         try (RandomAccessFile aFile = new RandomAccessFile(file, "r");
              FileChannel inChannel = aFile.getChannel();) {
 
@@ -38,12 +37,13 @@ public class FileReader {
             buffer.flip();
 
             for (int i = 0; i < fileSize; i++) {
-                str += (char) buffer.get();
+                stringBuilder.append( (char) buffer.get());
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+        String str = stringBuilder.toString();
         String[] lines = str.split("\r?\n|\r");
         Map<String, String> map = new HashMap<>();
 
